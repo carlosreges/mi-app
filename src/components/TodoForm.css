@@ -103,7 +103,13 @@
 }
 
 @media screen and (max-width: 768px) {
-  .todo-input {
-    width: 60%;
+  .todo-form {
+    flex-direction: column;
+  }
+  
+  .todo-input, .todo-button, .todo-category, .todo-priority, .todo-date {
+    width: 100%;
+    margin: 5px 0;
+    border-radius: 4px;
   }
 } 

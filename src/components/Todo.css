@@ -5,7 +5,9 @@
   margin: 4px auto;
   padding: 16px;
   border-radius: 5px;
-  width: 90%;
+  width: 100%;
+  max-width: 95%;
+  flex-wrap: wrap;
   background: linear-gradient(
     90deg,
     rgba(93, 12, 255, 1) 0%,
@@ -96,4 +98,42 @@
 
 .priority-baja .todo-priority-indicator {
   background-color: #2ecc71;
+}
+
+.animated-item {
+  animation: slideIn 0.3s ease forwards;
+  opacity: 0;
+  transform: translateY(-20px);
+}
+
+@keyframes slideIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.complete {
+  transition: all 0.3s ease;
+  opacity: 0.6;
+  transform: translateX(20px);
+}
+
+@media screen and (max-width: 768px) {
+  .todo-row {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
+  }
+  
+  .todo-info {
+    margin: 8px 0;
+    flex-wrap: wrap;
+  }
+  
+  .icons {
+    width: 100%;
+    justify-content: flex-end;
+    margin-top: 8px;
+  }
 } 

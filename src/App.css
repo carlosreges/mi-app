@@ -12,6 +12,7 @@ body {
     rgba(48, 16, 255, 1) 0%,
     rgba(100, 115, 255, 1) 100%
   );
+  overflow-x: hidden;
 }
 
 .todo-app {
@@ -25,11 +26,40 @@ body {
   margin: 128px auto;
   border-radius: 10px;
   padding-bottom: 32px;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 @media screen and (max-width: 768px) {
   .todo-app {
     width: 95%;
+    margin: 20px auto;
+    padding: 15px;
+  }
+  
+  .theme-toggle {
+    top: 10px;
+    right: 10px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  h1 {
+    font-size: 20px;
+  }
+  
+  .todo-form {
+    flex-direction: column;
+  }
+  
+  .todo-input, .todo-button, .todo-category, .todo-priority, .todo-date {
+    width: 100%;
+    margin: 5px 0;
+  }
+  
+  .todo-app {
+    margin: 10px auto;
+    padding: 10px;
   }
 }
 
@@ -70,4 +100,36 @@ body {
   to {
     transform: rotate(360deg);
   }
+}
+
+.app {
+  min-height: 100vh;
+  transition: background-color 0.3s ease;
+}
+
+.light-mode {
+  background: linear-gradient(
+    90deg,
+    rgba(128, 128, 255, 1) 0%,
+    rgba(160, 180, 255, 1) 100%
+  );
+}
+
+.dark-mode {
+  background: linear-gradient(
+    90deg,
+    rgba(48, 16, 255, 1) 0%,
+    rgba(100, 115, 255, 1) 100%
+  );
+}
+
+.theme-toggle {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: transparent;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 10;
 }

@@ -1,3 +1,41 @@
+# Gestor de Tareas React
+
+Una aplicación web moderna para gestionar tus tareas diarias, desarrollada con React.
+
+## Características
+
+- Creación, edición y eliminación de tareas
+- Categorización (Personal, Trabajo, Estudio)
+- Niveles de prioridad 
+- Fechas límite
+- Filtrado por estado y búsqueda por texto
+- Tema claro/oscuro
+- Diseño responsivo
+- Animaciones suaves
+- Persistencia de datos con localStorage
+
+## Tecnologías utilizadas
+
+- React 19
+- CSS moderno
+- Context API para gestión de estado
+- Animaciones CSS
+- LocalStorage para persistencia
+
+## Instalación
+
+1. Clona este repositorio
+2. Instala las dependencias con `npm install`
+3. Ejecuta `npm start` para iniciar el servidor de desarrollo
+
+## Despliegue
+
+Esta aplicación está optimizada para ser desplegada en Vercel.
+
+## Autor
+
+Desarrollado por Carlos
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

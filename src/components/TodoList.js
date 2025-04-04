@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import TodoForm from './TodoForm';
-import Todo from './Todo';
+import TodoItem from './TodoItem';
 import './TodoList.css';
 import TodoFilter from './TodoFilter';
 import TodoStats from './TodoStats';
@@ -82,10 +82,11 @@ function TodoList() {
         </div>
         <TodoStats todos={todos} clearCompleted={clearCompleted} />
         <div className="todo-items">
-          {filteredTodos.map(todo => (
-            <Todo
+          {filteredTodos.map((todo, index) => (
+            <TodoItem
               key={todo.id}
               todo={todo}
+              index={index}
               completeTodo={completeTodo}
               deleteTodo={deleteTodo}
               editTodo={editTodo}
