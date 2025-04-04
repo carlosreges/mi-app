@@ -1,0 +1,24 @@
+.todo-search {
+  width: 60%;
+}
+
+.search-input {
+  padding: 14px;
+  border-radius: 4px;
+  border: 2px solid #5d0cff;
+  outline: none;
+  width: 100%;
+  background: transparent;
+  color: #fff;
+}
+
+.search-input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+@media screen and (max-width: 768px) {
+  .todo-search {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+} 
