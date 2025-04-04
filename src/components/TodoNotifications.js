@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import './TodoNotifications.css';
 
 function TodoNotifications({ todos }) {
   const [permission, setPermission] = useState('default');
@@ -57,9 +56,30 @@ function TodoNotifications({ todos }) {
   
   if (permission !== "granted") {
     return (
-      <div className="notification-permission">
-        <p>Habilita notificaciones para recibir alertas sobre tareas próximas</p>
-        <button onClick={requestPermission}>Permitir notificaciones</button>
+      <div style={{
+        backgroundColor: 'rgba(255, 255, 255, 0.1)',
+        padding: '15px',
+        margin: '15px auto',
+        borderRadius: '8px',
+        width: '90%',
+        textAlign: 'center'
+      }}>
+        <p style={{ marginBottom: '10px', color: '#fff' }}>
+          Habilita notificaciones para recibir alertas sobre tareas próximas
+        </p>
+        <button 
+          onClick={requestPermission}
+          style={{
+            background: 'linear-gradient(90deg, rgba(93, 12, 255, 1) 0%, rgba(155, 0, 250, 1) 100%)',
+            border: 'none',
+            color: 'white',
+            padding: '10px 20px',
+            borderRadius: '4px',
+            cursor: 'pointer'
+          }}
+        >
+          Permitir notificaciones
+        </button>
       </div>
     );
   }
