@@ -4,6 +4,22 @@ import './TodoStats.css';
 function TodoStats({ todos, clearCompleted }) {
   const pendingCount = todos.filter(todo => !todo.isComplete).length;
   
+  const getStats = () => {
+    const total = todos.length;
+    const completed = todos.filter(todo => todo.isComplete).length;
+    const pending = total - completed;
+    
+    const byCategory = {};
+    todos.forEach(todo => {
+      if (!byCategory[todo.category]) byCategory[todo.category] = 0;
+      byCategory[todo.category]++;
+    });
+    
+    return { total, completed, pending, byCategory };
+  };
+
+  const stats = getStats();
+
   return (
     <div className="todo-stats">
       <div className="todo-count">
@@ -14,6 +30,12 @@ function TodoStats({ todos, clearCompleted }) {
           Eliminar completadas
         </button>
       )}
+      <div className="stats-detail">
+        <p>Completadas: {stats.completed}</p>
+        {Object.entries(stats.byCategory).map(([category, count]) => (
+          <p key={category}>{category}: {count}</p>
+        ))}
+      </div>
     </div>
   );
 }
