@@ -2,37 +2,69 @@ import React, { useEffect, useState } from 'react';
 import './TodoNotifications.css';
 
 function TodoNotifications({ todos }) {
-  const [notifications, setNotifications] = useState([]);
+  const [permission, setPermission] = useState('default');
   
   useEffect(() => {
-    // Buscar tareas que vencen en menos de 24 horas
-    const today = new Date();
-    const tomorrow = new Date(today);
-    tomorrow.setDate(tomorrow.getDate() + 1);
+    // Comprobar si el navegador soporta notificaciones
+    if (!("Notification" in window)) {
+      console.log("Este navegador no soporta notificaciones");
+      return;
+    }
     
-    const urgent = todos.filter(todo => {
-      if (!todo.dueDate || todo.isComplete) return false;
-      const dueDate = new Date(todo.dueDate);
-      return dueDate >= today && dueDate <= tomorrow;
-    });
+    // Comprobar permiso actual
+    setPermission(Notification.permission);
     
-    setNotifications(urgent);
+    // Verificar tareas que vencen hoy
+    checkDueTasks();
+    
+    // Configurar un intervalo para verificar cada hora
+    const interval = setInterval(checkDueTasks, 3600000);
+    
+    return () => clearInterval(interval);
   }, [todos]);
   
-  if (notifications.length === 0) return null;
+  const requestPermission = () => {
+    Notification.requestPermission().then(perm => {
+      setPermission(perm);
+      if (perm === "granted") {
+        checkDueTasks();
+      }
+    });
+  };
   
-  return (
-    <div className="notifications-container">
-      <h3>Tareas próximas a vencer:</h3>
-      <ul className="notification-list">
-        {notifications.map(todo => (
-          <li key={todo.id} className={`notification priority-${todo.priority}`}>
-            {todo.text} - Vence {new Date(todo.dueDate).toLocaleDateString()}
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
+  const checkDueTasks = () => {
+    if (permission !== "granted") return;
+    
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    
+    todos.forEach(todo => {
+      if (todo.isComplete) return;
+      if (!todo.dueDate) return;
+      
+      const dueDate = new Date(todo.dueDate);
+      dueDate.setHours(0, 0, 0, 0);
+      
+      // Si vence hoy
+      if (dueDate.getTime() === today.getTime()) {
+        new Notification(`¡Tarea para hoy!`, {
+          body: `"${todo.text}" vence hoy.`,
+          icon: '/logo192.png'
+        });
+      }
+    });
+  };
+  
+  if (permission !== "granted") {
+    return (
+      <div className="notification-permission">
+        <p>Habilita notificaciones para recibir alertas sobre tareas próximas</p>
+        <button onClick={requestPermission}>Permitir notificaciones</button>
+      </div>
+    );
+  }
+  
+  return null;
 }
 
 export default TodoNotifications; 

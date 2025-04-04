@@ -5,6 +5,7 @@ import './TodoList.css';
 import TodoFilter from './TodoFilter';
 import TodoStats from './TodoStats';
 import TodoSearch from './TodoSearch';
+import TodoNotifications from './TodoNotifications';
 
 function TodoList() {
   const [todos, setTodos] = useState([]);
@@ -81,6 +82,7 @@ function TodoList() {
           <TodoFilter filter={filter} setFilter={setFilter} />
         </div>
         <TodoStats todos={todos} clearCompleted={clearCompleted} />
+        <TodoNotifications todos={todos} />
         <div className="todo-items">
           {filteredTodos.map((todo, index) => (
             <TodoItem

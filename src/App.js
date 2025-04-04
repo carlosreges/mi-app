@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import './App.css';
 import TodoList from './components/TodoList';
 import { ThemeContext, ThemeProvider } from './context/ThemeContext';
-
+ 
 function AppContent() {
   const { darkMode, toggleTheme } = useContext(ThemeContext);
   
